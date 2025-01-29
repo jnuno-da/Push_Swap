@@ -1,0 +1,111 @@
+#include "push_swap.h"
+
+void	init_stacks(t_info *info)
+{
+	info->stack_a = NULL;
+	info->stack_b = NULL;
+	info->top_a = NULL;
+	info->top_b = NULL;
+	info->size_a = 0;
+	info->size_b = 0;
+	info->pivo = 0;
+	info->max = 0;
+}
+
+void	create_stacks(int *a, int list_size, t_info *info)
+{
+	int		i;
+	g_list	*new;
+	g_list	*prev;
+
+	new = malloc(sizeof(g_list));
+	info->stack_a = new;
+	info->size_a = list_size;
+	prev = NULL;
+	i = 0;
+	while (i < list_size)
+	{
+		new->value = a[i];
+		new->index = 0;
+		new->next = NULL;
+		new->prev = prev;
+		if (i + 1 < list_size)
+		{
+			new->next = malloc(sizeof(g_list));
+			prev = new;
+			new = new->next;
+		}
+		i++;
+	}
+	info->top_a = new;
+}
+
+void	find_max(t_info *info)
+{
+	g_list	*temp;
+	int		max;
+
+	temp = info->stack_a;
+	max = temp->value;
+	while (temp)
+	{
+		if (temp->value > max)
+			max = temp->value;
+		temp = temp->next;
+	}
+	info->max = max;
+}
+
+void	init_index(t_info *info)
+{
+	g_list	*temp;
+	g_list	*temp_min;
+	int		index;
+	int		min;
+
+	find_max(info);
+	temp = info->stack_a;
+	temp_min = NULL;
+	index = 1;
+	while (index <= info->size_a)
+	{
+		min = info->max;
+		while (temp)
+		{
+			if (temp->value <= min && temp->index == 0)
+			{
+				min = temp->value;
+				temp_min = temp;
+			}
+			temp = temp->next;
+		}
+		temp_min->index = index;
+		temp = info->stack_a;
+		index++;
+	}
+}
+
+void	case3(t_info *info)
+{
+	if (info->top_a->value > info->stack_a->value && \
+		info->stack_a->value > info->stack_a->next->value)
+		rotate_a(info, 0);
+	else if (info->top_a->value > info->stack_a->next->value && \
+			info->top_a->value < info->stack_a->value)
+		swap_a(info);
+	else if (info->top_a->value > info->stack_a->next->value && \
+			info->stack_a->next->value > info->stack_a->value)
+	{
+		rotate_a(info, 0);
+		swap_a(info);
+	}
+	else if (info->top_a->value < info->stack_a->next->value && \
+			info->top_a->value > info->stack_a->value)
+		reverse_rotate_a(info, 0);
+	else if (info->top_a->value < info->stack_a->next->value && \
+			info->stack_a->next->value > info->stack_a->value)
+	{
+		reverse_rotate_a(info, 0);
+		swap_a(info);
+	}
+}

@@ -1,28 +1,79 @@
 #include "push_swap.h"
 
-int main(int argc, char **argv) {
-    // Inicializa as pilhas a e b
-    stack *a = initialize_stack();
-    stack *b = initialize_stack();
+void	free_stacks(t_info *info)
+{
+	g_list	*temp;
 
-    // Lê os argumentos e preenche a pilha a
-    if (!parse_arguments(argc, argv, a)) {
-        // Lidar com erro de argumentos inválidos
-        return 1;
-    }
+	while (info->stack_a)
+	{
+		temp = info->stack_a;
+		info->stack_a = temp->next;
+		free(temp);
+	}
+}
 
-    // Verifica se os argumentos são válidos
-    if (!is_valid_stack(a)) {
-        // Lidar com erro de pilha inválida
-        return 1;
-    }
+void	final_sort(t_info *info)
+{
+	g_list	*temp;
+	int		i;
 
-    // Chama a função sort_stack(a, b)
-    sort_stack(a, b);
+	i = 0;
+	temp = info->top_a;
+	find_max(info);
+	while (temp->value != info->max)
+	{
+		i++;
+		temp = temp->prev;
+	}
+	if (i <= (info->size_a / 2))
+	{
+		while (info->stack_a->value != info->max)
+			rotate_a(info, 0);
+	}
+	else
+	{
+		while (info->stack_a->value != info->max)
+			reverse_rotate_a(info, 0);
+	}
+}
 
-    // Libera a memória alocada
-    free_stack(a);
-    free_stack(b);
+void	push_swap(t_info *info)
+{
+	int	z;
 
-    return 0;
+	z = 0;
+	if (info->size_a > 2)
+	{
+		while (z++ < (info->size_a - 3))
+			bigger_stacks(info);
+		case3(info);
+		while (info->stack_b)
+			push_back(info);
+	}
+	final_sort(info);
+	free_stacks(info);
+}
+
+int	main(int argc, char **argv)
+{
+	t_info	info;
+	int		*input;
+
+	input = NULL;
+	if (argc < 2)
+		return (0);
+	if (check_error(argv) < 0)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (1);
+	}
+	input = check_for_duplicates(input, argv, argc -1);
+	if (is_ordenated(argc - 1, input))
+		return (0);
+	init_stacks(&info);
+	create_stacks(input, argc - 1, &info);
+	free(input);
+	init_index(&info);
+	push_swap(&info);
+	return (0);
 }
