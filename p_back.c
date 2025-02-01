@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_back.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:40:32 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:40:34 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	total_cost(int a, int b)
@@ -19,10 +31,10 @@ static int	total_cost(int a, int b)
 	return (ft_abs(a) + ft_abs(b));
 }
 
-static g_list	*choose_push_back(t_info *info)
+static t_lst	*choose_push_back(t_info *info)
 {
-	g_list	*temp;
-	g_list	*push;
+	t_lst	*temp;
+	t_lst	*push;
 	int		min_cost;
 	int		temp_cost;
 
@@ -42,7 +54,7 @@ static g_list	*choose_push_back(t_info *info)
 	return (push);
 }
 
-static int	handle_stack_b(t_info *info, g_list *target, int i)
+static int	handle_stack_b(t_info *info, t_lst *target, int i)
 {
 	if (target->cost_b > 0)
 	{
@@ -65,7 +77,7 @@ static int	handle_stack_b(t_info *info, g_list *target, int i)
 
 void	push_back(t_info *info)
 {
-	g_list	*target;
+	t_lst	*target;
 	int		i;
 
 	set_cost(info);

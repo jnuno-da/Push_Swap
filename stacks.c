@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stacks.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:41:18 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:41:20 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	init_stacks(t_info *info)
@@ -15,10 +27,10 @@ void	init_stacks(t_info *info)
 void	create_stacks(int *a, int list_size, t_info *info)
 {
 	int		i;
-	g_list	*new;
-	g_list	*prev;
+	t_lst	*new;
+	t_lst	*prev;
 
-	new = malloc(sizeof(g_list));
+	new = malloc(sizeof(t_lst));
 	info->stack_a = new;
 	info->size_a = list_size;
 	prev = NULL;
@@ -31,7 +43,7 @@ void	create_stacks(int *a, int list_size, t_info *info)
 		new->prev = prev;
 		if (i + 1 < list_size)
 		{
-			new->next = malloc(sizeof(g_list));
+			new->next = malloc(sizeof(t_lst));
 			prev = new;
 			new = new->next;
 		}
@@ -42,7 +54,7 @@ void	create_stacks(int *a, int list_size, t_info *info)
 
 void	find_max(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		max;
 
 	temp = info->stack_a;
@@ -58,8 +70,8 @@ void	find_max(t_info *info)
 
 void	init_index(t_info *info)
 {
-	g_list	*temp;
-	g_list	*temp_min;
+	t_lst	*temp;
+	t_lst	*temp_min;
 	int		index;
 	int		min;
 

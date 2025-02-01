@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_swap.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:39:36 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:39:38 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap_a(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		swapv;
 	int		swapi;
 
@@ -20,7 +32,7 @@ void	swap_a(t_info *info)
 
 void	swap_b(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		swapv;
 	int		swapi;
 

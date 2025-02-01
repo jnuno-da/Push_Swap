@@ -1,8 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:39:45 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:39:47 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+int		check_double_sign(char **argv)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while(argv[i][j])
+	{
+		if (argv[i][j] == '-')
+		{
+			if (j > 0)
+				return(-1);
+		}
+		else if (!ft_isdigit(argv[i][j]))
+			return (-1);
+		j++;
+	}
+	return (0);
+}
 void	free_stacks(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	while (info->stack_a)
 	{
@@ -14,7 +46,7 @@ void	free_stacks(t_info *info)
 
 void	final_sort(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		i;
 
 	i = 0;
@@ -60,12 +92,12 @@ int	main(int argc, char **argv)
 	int		*input;
 
 	input = NULL;
-	if (argc < 2)
+	if (argc <= 1)
 		return (0);
 	if (check_error(argv) < 0)
 	{
 		ft_putstr_fd("Error\n", 2);
-		return (1);
+		return (0);
 	}
 	input = check_for_duplicates(input, argv, argc -1);
 	if (is_ordenated(argc - 1, input))

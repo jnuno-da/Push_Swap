@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate_utils_f.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:41:11 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:41:13 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	rotate_a(t_info *info, int rr)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_a;
 	while (temp->next != info->top_a)
@@ -19,7 +31,7 @@ void	rotate_a(t_info *info, int rr)
 
 void	rotate_b(t_info *info, int rr)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_b;
 	while (temp->next != info->top_b)

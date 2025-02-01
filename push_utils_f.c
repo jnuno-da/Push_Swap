@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_utils_f.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:40:49 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:40:50 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	delete_b(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_b;
 	while (temp->next != info->top_b && temp->next != NULL)
@@ -19,7 +31,7 @@ static void	delete_b(t_info *info)
 
 void	push_a(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_a;
 	if (info->stack_b == NULL)
@@ -44,7 +56,7 @@ void	push_a(t_info *info)
 
 static void	delete_a(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_a;
 	while (temp->next != info->top_a)
@@ -55,7 +67,7 @@ static void	delete_a(t_info *info)
 
 void	push_b(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_b;
 	if (info->stack_a == NULL)

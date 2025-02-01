@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_a_to_b.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:40:25 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:40:26 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	push_base(t_info *info, int i)
@@ -19,7 +31,7 @@ static void	push_top(t_info *info, int i)
 
 static void	get_pivot_1(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		min;
 	int		max;
 
@@ -71,7 +83,7 @@ static void	get_pivot(t_info *info)
 
 void	bigger_stacks(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		i;
 	int		j;
 

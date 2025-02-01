@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cost_chk.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:39:10 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:46:09 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_abs(int i)
@@ -9,7 +21,7 @@ int	ft_abs(int i)
 
 int	fin_max_index(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		max;
 
 	temp = info->stack_a;
@@ -25,7 +37,7 @@ int	fin_max_index(t_info *info)
 
 static int	insert_big_value(t_info *info, int index_b)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		i;
 
 	temp = info->top_a;
@@ -50,7 +62,7 @@ static int	insert_big_value(t_info *info, int index_b)
 
 static int	check_cost_a(t_info *info, int index_b)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		i;
 	int		max;
 
@@ -78,7 +90,7 @@ static int	check_cost_a(t_info *info, int index_b)
 
 void	set_cost(t_info *info)
 {
-	g_list	*temp;
+	t_lst	*temp;
 	int		i;
 
 	temp = info->top_b;

@@ -6,38 +6,40 @@
 /*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 15:36:57 by jnuno-da          #+#    #+#             */
-/*   Updated: 2025/01/29 01:11:20 by jnuno-da         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:10:26 by jnuno-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include "libft/libft.h"
 # include <stdlib.h>
+# include <limits.h>
 
-typedef struct f_list
+typedef struct s_lst
 {
-	int	value;
-	int	index;
-	int	cost_a;
-	int	cost_b;
-	struct f_list	*prev;
-	struct f_list	*next;
-}	g_list;
+	int				value;
+	int				index;
+	int				cost_a;
+	int				cost_b;
+	struct s_lst	*prev;
+	struct s_lst	*next;
+}	t_lst;
 
 typedef struct s_info
 {
-	g_list *stack_a;
-	g_list *stack_b;
-	g_list *top_a;
-	g_list *top_b;
+	t_lst	*stack_a;
+	t_lst	*stack_b;
+	t_lst	*top_a;
+	t_lst	*top_b;
 	int		size_a;
 	int		size_b;
-	int 	pivo;
+	int		pivo;
 	int		max;
 }	t_info;
 
+int		check_double_sign(char **argv);
 int		check_number(char *argv);
 int		check_error(char **argv);
 int		*check_for_duplicates(int *input, char **argv, int list_size);

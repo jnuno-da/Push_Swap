@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:49:06 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:49:06 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	check_number(char *argv)
@@ -8,14 +20,14 @@ int	check_number(char *argv)
 
 	i = 0;
 	sig = 0;
-	if (argv[i] == '-' || argv[i] == '+')
+	while (argv[i])
 	{
-		if (argv[i] == '-')
-			sig = 1;
+		if (argv[i] == '-' || argv[i] == '+')
+			sig++;
 		i++;
 	}
 	num = ft_atoi(&argv[i]);
-	if (sig && num > 2147483648)
+	if (sig && num >= 2147483648)
 		return (-1);
 	if (!sig && num > 2147483647)
 		return (-1);
@@ -38,12 +50,10 @@ int	check_error(char **argv)
 			if (check_number(argv[i]) == -1)
 				return (-1);
 		}
-		while (argv[i][j])
+		else
 		{
-			if (argv[i][j] == '-' || argv[i][j] == '+')
-				j++;
-			if (!ft_isdigit(argv[i][j++]))
-				return (-1);
+			if (check_double_sign(&argv[i]) == -1)
+				return(-1);
 		}
 	}
 	return (0);

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse_utils_f.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 11:41:04 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/01 11:41:05 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	reverse_rotate_a(t_info *info, int rrr)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_a;
 	info->stack_a = info->stack_a->next;
@@ -17,7 +29,7 @@ void	reverse_rotate_a(t_info *info, int rrr)
 
 void	reverse_rotate_b(t_info *info, int rrr)
 {
-	g_list	*temp;
+	t_lst	*temp;
 
 	temp = info->stack_b;
 	info->stack_b = info->stack_b->next;
