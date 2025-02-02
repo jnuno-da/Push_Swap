@@ -6,7 +6,7 @@
 /*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 15:36:57 by jnuno-da          #+#    #+#             */
-/*   Updated: 2025/02/01 18:10:26 by jnuno-da         ###   ########.fr       */
+/*   Updated: 2025/02/02 23:42:44 by jnuno-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <limits.h>
+# include <stdbool.h>
 
 typedef struct s_lst
 {
@@ -39,6 +40,7 @@ typedef struct s_info
 	int		max;
 }	t_info;
 
+long	ft_atol(const char *nptr);
 int		check_double_sign(char **argv);
 int		check_number(char *argv);
 int		check_error(char **argv);

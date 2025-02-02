@@ -14,22 +14,24 @@
 
 int	check_number(char *argv)
 {
-	unsigned int	num;
-	int				i;
-	int				sig;
+	long		num;
+	int		i;
+	int		sig;
 
 	i = 0;
 	sig = 0;
-	while (argv[i])
+	if (argv[i] == '-' || argv[i] == '+')
 	{
-		if (argv[i] == '-' || argv[i] == '+')
+		if(argv[i] == '-')
+			sig = -1;
+		else
 			sig++;
 		i++;
 	}
-	num = ft_atoi(&argv[i]);
-	if (sig && num >= 2147483648)
+	num = ft_atol(&argv[i]);
+	if (num > 2147483647)
 		return (-1);
-	if (!sig && num > 2147483647)
+	if (num * sig < INT_MIN || num * sig > INT_MAX)
 		return (-1);
 	return (0);
 }
@@ -37,24 +39,16 @@ int	check_number(char *argv)
 int	check_error(char **argv)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (argv[++i])
 	{
-		j = 0;
 		if (ft_strlen(argv[i]) > 11)
 			return (-1);
-		if (ft_strlen(argv[i]) >= 10)
-		{
-			if (check_number(argv[i]) == -1)
+		if (check_number(argv[i]) == -1)
 				return (-1);
-		}
-		else
-		{
-			if (check_double_sign(&argv[i]) == -1)
+		if (check_double_sign(&argv[i]) == -1)
 				return(-1);
-		}
 	}
 	return (0);
 }

@@ -54,3 +54,27 @@ void	swap_s(t_info *info)
 	swap_b(info);
 	ft_putstr_fd("ss\n", 1);
 }
+long	ft_atol(const char *nptr)
+{
+	long	res;
+	long	m;
+	int		i;
+
+	i = 0;
+	m = 1;
+	res = 0;
+	while ((nptr[i] == 32) || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			m = m * -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = res * 10 + (nptr[i] - 48);
+		i++;
+	}
+	return (res * m);
+}

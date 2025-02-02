@@ -96,3 +96,5 @@ void	push_back(t_info *info)
 	push_a(info);
 	info->size_b--;
 }
+
+
