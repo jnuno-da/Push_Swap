@@ -12,78 +12,87 @@
 
 #include "push_swap.h"
 
-int		check_double_sign(char **argv)
+int	count_args(char **argv, int argc)
 {
 	int	i;
 	int j;
+	int count;
 
 	i = 0;
-	j = 0;
-	while(argv[i][j])
+	count = 0;
+	while (i < argc)
 	{
-		if (argv[i][j] == '-')
+		j = 0;
+		while(argv[i][j])
 		{
-			if (j > 0)
-				return(-1);
+			if (argv[i][j] != ' ' && (j == 0 || argv[i][j - 1] == ' '))
+				count++;
+			j++;
 		}
-		else if (!ft_isdigit(argv[i][j]))
-			return (-1);
-		j++;
+		i++;
 	}
-	return (0);
+	return (count);
 }
-void	free_stacks(t_info *info)
+int	*parse_input(char **argv, int argc)
 {
-	t_lst	*temp;
-
-	while (info->stack_a)
-	{
-		temp = info->stack_a;
-		info->stack_a = temp->next;
-		free(temp);
-	}
-}
-
-void	final_sort(t_info *info)
-{
-	t_lst	*temp;
-	int		i;
+	int *input; 
+	char **split;
+	int i;
+	int	k;
+	int j;
 
 	i = 0;
-	temp = info->top_a;
-	find_max(info);
-	while (temp->value != info->max)
+	k = 0;
+	input = malloc(sizeof(int) * count_args(argv, argc));
+	if (!input)
+		return (NULL);
+	while (i < argc)
 	{
+		split = ft_split(argv[i], ' ');
+		j = 0;
+		while (split[j] != NULL)
+		{
+			input[k++] = ft_atoi(split[j]);
+			j++;
+		}
+		free_split(split);
 		i++;
-		temp = temp->prev;
 	}
-	if (i <= (info->size_a / 2))
-	{
-		while (info->stack_a->value != info->max)
-			rotate_a(info, 0);
-	}
-	else
-	{
-		while (info->stack_a->value != info->max)
-			reverse_rotate_a(info, 0);
-	}
+	return (input);
 }
-
-void	push_swap(t_info *info)
+int	*aux_input(int argc, char **argv)
 {
-	int	z;
+	int *input;
 
-	z = 0;
-	if (info->size_a > 2)
+	if (check_error(argv) < 0)
 	{
-		while (z++ < (info->size_a - 3))
-			bigger_stacks(info);
-		case3(info);
-		while (info->stack_b)
-			push_back(info);
+		ft_putstr_fd("Error\n", 2);
+		return (NULL);
 	}
-	final_sort(info);
-	free_stacks(info);
+	input = parse_input(argv, argc);
+	if (!input || check_for_duplicates(input, argc - 1) < 0)
+	{
+		ft_putstr_fd("Error\n", 2);
+		free(input);
+		return (NULL);	
+	}
+	if (is_ordenated(argc - 1, input))
+		return (free(input), NULL);
+	return (input);
+}
+void	free_split(char **split)
+{
+	int i;
+
+	i = 0;
+	if (!split)
+		return ;
+	while(split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 int	main(int argc, char **argv)
@@ -94,13 +103,10 @@ int	main(int argc, char **argv)
 	input = NULL;
 	if (argc <= 1)
 		return (0);
-	if (check_error(argv) < 0)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (0);
-	}
-	input = check_for_duplicates(input, argv, argc -1);
-	if (is_ordenated(argc - 1, input))
+	if(argc == 2)
+	
+	input = aux_input(argc, argv);
+	if (!input)
 		return (0);
 	init_stacks(&info);
 	create_stacks(input, argc - 1, &info);

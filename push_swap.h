@@ -6,7 +6,7 @@
 /*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 15:36:57 by jnuno-da          #+#    #+#             */
-/*   Updated: 2025/02/03 23:22:51 by jnuno-da         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:43:06 by jnuno-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,19 @@ typedef struct s_info
 	int		max;
 }	t_info;
 
+int		count_args(char **argv, int argc);
+int		*parse_input(char **argv, int argc);
+int		*aux_input(int argc, char **argv);
+void	free_split(char **split);
 long	ft_atol(const char *nptr);
 int		check_double_sign(char **argv);
 int		check_number(char *argv);
 int		check_error(char **argv);
-int		*check_for_duplicates(int *input, char **argv, int list_size);
+int		check_for_duplicates(int *input, int list_size);
 int		is_ordenated(int input_len, int *input);
 void	init_stacks(t_info *info);
 void	create_stacks(int *a, int list_size, t_info *info);
+void	free_stacks(t_info *info);
 void	find_max(t_info *info);
 void	init_index(t_info *info);
 void	case3(t_info *info);
@@ -56,6 +61,7 @@ void	swap_b(t_info *info);
 void	swap_s(t_info *info);
 void	push_a(t_info *info);
 void	push_b(t_info *info);
+void	push_swap(t_info *info);
 void	rotate_a(t_info *info, int rr);
 void	rotate_b(t_info *info, int rr);
 void	rotate_r(t_info *info);

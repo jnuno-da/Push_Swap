@@ -19,19 +19,15 @@ int	check_number(char *argv)
 	int		sig;
 
 	i = 0;
-	sig = 0;
+	sig = 1;
 	if (argv[i] == '-' || argv[i] == '+')
 	{
 		if(argv[i] == '-')
 			sig = -1;
-		else
-			sig++;
 		i++;
 	}
-	num = ft_atol(&argv[i]);
-	if (num > 2147483647)
-		return (-1);
-	if (num * sig < INT_MIN || num * sig > INT_MAX)
+	num = ft_atol(&argv[i]) * sig;
+	if (num < INT_MIN || num > INT_MAX)
 		return (-1);
 	return (0);
 }
@@ -52,49 +48,26 @@ int	check_error(char **argv)
 	}
 	return (0);
 }
-
-static int	compare(int input, int *tmp, int z)
+int	check_for_duplicates(int *input, int list_size)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (i < z)
+	if (!input)
+		return (-1);
+	while (i < list_size)
 	{
-		if (input == tmp[i])
+		j = i + 1;
+		while (j < list_size)
 		{
-			free(tmp);
-			return (1);
+			if (input[i] == input[j])
+				return (-1);
+			j++;
 		}
 		i++;
 	}
 	return (0);
-}
-
-int	*check_for_duplicates(int *input, char **argv, int list_size)
-{
-	int	i;
-	int	j;
-	int	z;
-	int	*temp;
-
-	input = malloc((list_size) * sizeof(int));
-	temp = malloc((list_size) * sizeof(int));
-	i = 0;
-	j = list_size -1;
-	z = 0;
-	while (argv[++i])
-	{
-		input[j] = ft_atoi(argv[i]);
-		if (compare(input[j], temp, z))
-		{
-			free(input);
-			ft_putstr_fd("Error\n", 2);
-			exit(1);
-		}
-		temp[z++] = input[j--];
-	}
-	free(temp);
-	return (input);
 }
 
 int	is_ordenated(int input_len, int *input)
