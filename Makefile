@@ -20,7 +20,7 @@ LIBFT	= libft/libft.a
 
 SRCS = cost_chk.c error_utils.c f_swap.c main.c op_a_to_b.c p_back.c \
 		push_utils_f.c reverse_utils_f.c rotate_utils_f.c stacks.c \
-		sorting.c \
+		sorting.c split.c \
 
 OBJ = $(SRCS:.c=.o)
 

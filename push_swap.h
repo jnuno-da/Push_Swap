@@ -6,7 +6,7 @@
 /*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 15:36:57 by jnuno-da          #+#    #+#             */
-/*   Updated: 2025/02/04 23:43:06 by jnuno-da         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:28:22 by jnuno-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_info
 }	t_info;
 
 int		count_args(char **argv, int argc);
+int		*parse_split(char **argv, int argc);
+int		count_args_split(char **argv);
 int		*parse_input(char **argv, int argc);
 int		*aux_input(int argc, char **argv);
 void	free_split(char **split);

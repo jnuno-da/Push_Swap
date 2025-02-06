@@ -103,15 +103,17 @@ int	main(int argc, char **argv)
 	input = NULL;
 	if (argc <= 1)
 		return (0);
-	if(argc == 2)
-	
-	input = aux_input(argc, argv);
-	if (!input)
-		return (0);
-	init_stacks(&info);
-	create_stacks(input, argc - 1, &info);
-	free(input);
-	init_index(&info);
-	push_swap(&info);
+	if (argc)
+	{
+		if (argc == 2)
+			input = parse_split(argv, argc);
+		else
+			input = aux_input(argc, argv);
+		init_stacks(&info);
+		create_stacks(input, argc - 1, &info);
+		free(input);
+		init_index(&info);
+		push_swap(&info);
+	}
 	return (0);
 }
