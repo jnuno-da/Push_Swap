@@ -70,13 +70,13 @@ int	*aux_input(int argc, char **argv)
 		return (NULL);
 	}
 	input = parse_input(argv, argc);
-	if (!input || check_for_duplicates(input, argc - 1) < 0)
+	if (!input || check_for_duplicates(input, count_args(argv, argc)) < 0)
 	{
 		ft_putstr_fd("Error\n", 2);
 		free(input);
 		return (NULL);	
 	}
-	if (is_ordenated(argc - 1, input))
+	if (is_ordenated(count_args(argv, argc), input))
 		return (free(input), NULL);
 	return (input);
 }
@@ -106,11 +106,11 @@ int	main(int argc, char **argv)
 	if (argc)
 	{
 		if (argc == 2)
-			input = parse_split(argv, argc);
+			input = parse_input(&argv[1], 1);
 		else
-			input = aux_input(argc, argv);
+			input = aux_input(argc - 1, argv);
 		init_stacks(&info);
-		create_stacks(input, argc - 1, &info);
+		create_stacks(input, count_args(argv, argc), &info);
 		free(input);
 		init_index(&info);
 		push_swap(&info);
