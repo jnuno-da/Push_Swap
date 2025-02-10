@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sorting.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 19:43:21 by jnuno-da          #+#    #+#             */
+/*   Updated: 2025/02/10 19:43:21 by jnuno-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	final_sort(t_info *info)
@@ -41,16 +53,17 @@ void	push_swap(t_info *info)
 	final_sort(info);
 	free_stacks(info);
 }
-int		check_double_sign(char **argv)
+
+int	check_double_sign(char **argv)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;
 	if (argv[i][j] == '-' || argv[i][j] == '+')
 		j++;
-	while(argv[i][j])
+	while (argv[i][j])
 	{
 		if (!ft_isdigit(argv[i][j]))
 			return (-1);
@@ -58,6 +71,7 @@ int		check_double_sign(char **argv)
 	}
 	return (0);
 }
+
 void	free_stacks(t_info *info)
 {
 	t_lst	*temp;

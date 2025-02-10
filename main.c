@@ -15,15 +15,15 @@
 int	count_args(char **argv, int argc)
 {
 	int	i;
-	int j;
-	int count;
+	int	j;
+	int	count;
 
-	i = 0;
+	i = 1;
 	count = 0;
 	while (i < argc)
 	{
 		j = 0;
-		while(argv[i][j])
+		while (argv[i][j])
 		{
 			if (argv[i][j] != ' ' && (j == 0 || argv[i][j - 1] == ' '))
 				count++;
@@ -33,13 +33,14 @@ int	count_args(char **argv, int argc)
 	}
 	return (count);
 }
+
 int	*parse_input(char **argv, int argc)
 {
-	int *input; 
-	char **split;
-	int i;
-	int	k;
-	int j;
+	int		*input;
+	char	**split;
+	int		i;
+	int		k;
+	int		j;
 
 	i = 0;
 	k = 0;
@@ -52,7 +53,8 @@ int	*parse_input(char **argv, int argc)
 		j = 0;
 		while (split[j] != NULL)
 		{
-			input[k++] = ft_atoi(split[j]);
+			input[k] = ft_atoi(split[j]);
+			k++;
 			j++;
 		}
 		free_split(split);
@@ -60,9 +62,10 @@ int	*parse_input(char **argv, int argc)
 	}
 	return (input);
 }
+
 int	*aux_input(int argc, char **argv)
 {
-	int *input;
+	int	*input;
 
 	if (check_error(argv) < 0)
 	{
@@ -74,20 +77,21 @@ int	*aux_input(int argc, char **argv)
 	{
 		ft_putstr_fd("Error\n", 2);
 		free(input);
-		return (NULL);	
+		return (NULL);
 	}
-	if (is_ordenated(count_args(argv, argc), input))
+	if (is_ordenated(count_args(argv, argc), input)) 
 		return (free(input), NULL);
 	return (input);
 }
+
 void	free_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!split)
 		return ;
-	while(split[i])
+	while (split[i])
 	{
 		free(split[i]);
 		i++;

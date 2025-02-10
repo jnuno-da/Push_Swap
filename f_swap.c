@@ -54,6 +54,7 @@ void	swap_s(t_info *info)
 	swap_b(info);
 	ft_putstr_fd("ss\n", 1);
 }
+
 long	ft_atol(const char *nptr)
 {
 	long	res;

@@ -14,7 +14,7 @@
 
 int	check_number(char *argv)
 {
-	long		num;
+	long	num;
 	int		i;
 	int		sig;
 
@@ -22,7 +22,7 @@ int	check_number(char *argv)
 	sig = 1;
 	if (argv[i] == '-' || argv[i] == '+')
 	{
-		if(argv[i] == '-')
+		if (argv[i] == '-')
 			sig = -1;
 		i++;
 	}
@@ -42,12 +42,13 @@ int	check_error(char **argv)
 		if (ft_strlen(argv[i]) > 11)
 			return (-1);
 		if (check_number(argv[i]) == -1)
-				return (-1);
+			return (-1);
 		if (check_double_sign(&argv[i]) == -1)
-				return(-1);
+			return (-1);
 	}
 	return (0);
 }
+
 int	check_for_duplicates(int *input, int list_size)
 {
 	int	i;
