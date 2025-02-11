@@ -99,25 +99,28 @@ void	init_index(t_info *info)
 
 void	case3(t_info *info)
 {
-	if (info->top_a->value > info->stack_a->value && \
-		info->stack_a->value > info->stack_a->next->value)
-		rotate_a(info, 0);
-	else if (info->top_a->value > info->stack_a->next->value && \
-			info->top_a->value < info->stack_a->value)
+	int	a;
+	int	b;
+	int	c;
+
+	a = info->stack_a->value;
+	b = info->stack_a->next->value;
+	c = info->top_a->value;
+
+	if (a > b && b < c && a < c)
 		swap_a(info);
-	else if (info->top_a->value > info->stack_a->next->value && \
-			info->stack_a->next->value > info->stack_a->value)
+	else if (a > b && b > c)
 	{
+		swap_a(info);
+		reverse_rotate_a(info, 0);
+	}
+	else if (a > b && b < c && a > c)
 		rotate_a(info, 0);
-		swap_a(info);
-	}
-	else if (info->top_a->value < info->stack_a->next->value && \
-			info->top_a->value > info->stack_a->value)
-		reverse_rotate_a(info, 0);
-	else if (info->top_a->value < info->stack_a->next->value && \
-			info->stack_a->next->value > info->stack_a->value)
+	else if (a < b && b > c && a < c)
 	{
-		reverse_rotate_a(info, 0);
 		swap_a(info);
+		rotate_a(info, 0);
 	}
+	else if (a < b && b > c && a > c)
+		reverse_rotate_a(info, 0);
 }

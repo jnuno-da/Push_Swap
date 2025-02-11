@@ -35,16 +35,28 @@ int	check_number(char *argv)
 int	check_error(char **argv)
 {
 	int	i;
+	int j;
+	char **split;
 
 	i = 0;
 	while (argv[++i])
 	{
-		if (ft_strlen(argv[i]) > 11)
-			return (-1);
-		if (check_number(argv[i]) == -1)
-			return (-1);
-		if (check_double_sign(&argv[i]) == -1)
-			return (-1);
+		if (ft_strchr(argv[i], ' '))
+		{
+			split = ft_split(argv[i], ' ');
+			j = 0;
+			while(split[j])
+			{
+				if (ft_strlen(split[j]) > 11 || check_number(split[j]) == -1 ||
+					check_double_sign(&split[j]) == -1)
+					return(free_split(split), -1);
+				j++;
+			}
+			free_split(split);
+		}
+		else if (ft_strlen(argv[i]) > 11 || check_number(argv[i]) == -1 ||
+					check_double_sign(&argv[i]) == -1)
+				return (-1);
 	}
 	return (0);
 }
@@ -78,10 +90,9 @@ int	is_ordenated(int input_len, int *input)
 	i = 0;
 	while (i < (input_len - 1))
 	{
-		if (input[i] < input[i + 1])
+		if (input[i] > input[i + 1])
 			return (0);
 		i++;
 	}
-	free(input);
 	return (1);
 }

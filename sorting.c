@@ -42,15 +42,25 @@ void	push_swap(t_info *info)
 	int	z;
 
 	z = 0;
-	if (info->size_a > 2)
+	if (info->size_a == 2)
+    {
+		if (info->stack_a->value > info->top_a->value)
+			swap_a(info);
+	}
+	else if (info->size_a == 3)
 	{
+		case3(info);
+		return;
+	}
+	else if (info->size_a > 3)
+    {
 		while (z++ < (info->size_a - 3))
 			bigger_stacks(info);
 		case3(info);
 		while (info->stack_b)
 			push_back(info);
+		final_sort(info);
 	}
-	final_sort(info);
 	free_stacks(info);
 }
 

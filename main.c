@@ -15,22 +15,24 @@
 int	count_args(char **argv, int argc)
 {
 	int	i;
-	int	j;
 	int	count;
 
-	i = 1;
 	count = 0;
-	while (i < argc)
+	if(argc == 2)
 	{
-		j = 0;
-		while (argv[i][j])
+		i = 0;
+		while (argv[1][i])
 		{
-			if (argv[i][j] != ' ' && (j == 0 || argv[i][j - 1] == ' '))
-				count++;
-			j++;
+			while (argv[1][i])
+			{
+				if (argv[1][i] != ' ' && (i == 0 || argv[1][i - 1] == ' '))
+					count++;
+				i++;
+			}
 		}
-		i++;
 	}
+	else
+		count = argc - 1;
 	return (count);
 }
 
@@ -39,26 +41,22 @@ int	*parse_input(char **argv, int argc)
 	int		*input;
 	char	**split;
 	int		i;
-	int		k;
-	int		j;
 
-	i = 0;
-	k = 0;
 	input = malloc(sizeof(int) * count_args(argv, argc));
 	if (!input)
 		return (NULL);
-	while (i < argc)
+	i = -1;
+	if (argc == 2)
 	{
-		split = ft_split(argv[i], ' ');
-		j = 0;
-		while (split[j] != NULL)
-		{
-			input[k] = ft_atoi(split[j]);
-			k++;
-			j++;
-		}
+		split = ft_split(argv[1], ' ');
+		while (split[++i])
+			input[i] = ft_atoi(split[i]);
 		free_split(split);
-		i++;
+	}
+	else
+	{
+		while(++i < count_args(argv, argc))
+			input[i] = ft_atoi(argv[i + 1]);
 	}
 	return (input);
 }
@@ -80,7 +78,10 @@ int	*aux_input(int argc, char **argv)
 		return (NULL);
 	}
 	if (is_ordenated(count_args(argv, argc), input)) 
-		return (free(input), NULL);
+	{
+		free(input);
+		return (NULL);
+	}
 	return (input);
 }
 
@@ -107,17 +108,13 @@ int	main(int argc, char **argv)
 	input = NULL;
 	if (argc <= 1)
 		return (0);
-	if (argc)
-	{
-		if (argc == 2)
-			input = parse_input(&argv[1], 1);
-		else
-			input = aux_input(argc - 1, argv);
-		init_stacks(&info);
-		create_stacks(input, count_args(argv, argc), &info);
-		free(input);
-		init_index(&info);
-		push_swap(&info);
-	}
+	input = aux_input(argc, argv);
+	if (!input)
+		return (0);
+	init_stacks(&info);
+	create_stacks(input, count_args(argv, argc), &info);
+	free(input);
+	init_index(&info);
+	push_swap(&info);
 	return (0);
 }

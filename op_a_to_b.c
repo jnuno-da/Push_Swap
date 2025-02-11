@@ -59,8 +59,9 @@ static void	get_pivot(t_info *info)
 {
 	static int	blocks;
 	static int	i;
-	static int	div = 1;
+	static int	div;
 
+	div = 1;
 	if (i == 0)
 	{
 		if (info->size_a >= 100 && info->size_a < 500)
