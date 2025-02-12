@@ -55,7 +55,10 @@ void	push_swap(t_info *info)
 	else if (info->size_a > 3)
     {
 		while (z++ < (info->size_a - 3))
-			bigger_stacks(info);
+		{
+			if(info->stack_a)
+				bigger_stacks(info);
+		}
 		case3(info);
 		while (info->stack_b)
 			push_back(info);

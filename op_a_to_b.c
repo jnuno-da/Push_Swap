@@ -88,17 +88,19 @@ void	bigger_stacks(t_info *info)
 	int		i;
 	int		j;
 
+	if(!info || !info->stack_a || !info->top_a)
+		return;
 	i = 0;
 	j = 0;
 	get_pivot(info);
 	temp = info->stack_a;
-	while (temp->index > info->pivo)
+	while (temp && temp->index > info->pivo)
 	{
 		temp = temp->next;
 		i++;
 	}
 	temp = info->top_a;
-	while (temp->index > info->pivo)
+	while (temp &&temp->index > info->pivo)
 	{
 		temp = temp->prev;
 		j++;
