@@ -6,7 +6,7 @@
 /*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 15:36:57 by jnuno-da          #+#    #+#             */
-/*   Updated: 2025/02/11 22:35:04 by jnuno-da         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:58:23 by jnuno-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,51 @@
 # include <limits.h>
 # include <stdbool.h>
 
+// Stack
 typedef struct s_lst
 {
 	int				value;
 	int				index;
-	int				cost_a;
-	int				cost_b;
-	struct s_lst	*prev;
 	struct s_lst	*next;
-}	t_lst;
+}				t_lst;
 
-typedef struct s_info
-{
-	t_lst	*stack_a;
-	t_lst	*stack_b;
-	t_lst	*top_a;
-	t_lst	*top_b;
-	int		size_a;
-	int		size_b;
-	int		pivo;
-	int		max;
-}	t_info;
+// Util functions
+t_lst	*ft_lstnew(int value);
+t_lst	*ft_lstlast(t_lst *head);
+void	ft_lstadd_front(t_lst **stack, t_lst *new);
+void	ft_lstadd_back(t_lst **stack, t_lst *new);
+void	printList(t_lst *head);
+int		ft_lstsize(t_lst *head);
 
-int		*parse_input(char **argv, int argc);
-int		*aux_input(int argc, char **argv);
-void	free_split(char **split);
-long	ft_atol(const char *nptr);
-int		check_double_sign(char **argv);
-int		check_number(char *argv);
-int		check_error(char **argv);
-int		check_for_duplicates(int *input, int list_size);
-int		is_ordenated(int input_len, int *input);
-void	init_stacks(t_info *info);
-void	create_stacks(int *a, int list_size, t_info *info);
-void	free_stacks(t_info *info);
-void	find_max(t_info *info);
-void	init_index(t_info *info);
-void	case3(t_info *info);
-void	swap_a(t_info *info);
-void	swap_b(t_info *info);
-void	swap_s(t_info *info);
-void	push_a(t_info *info);
-void	push_b(t_info *info);
-void	push_swap(t_info *info);
-void	rotate_a(t_info *info, int rr);
-void	rotate_b(t_info *info, int rr);
-void	rotate_r(t_info *info);
-void	reverse_rotate_a(t_info *info, int rrr);
-void	reverse_rotate_b(t_info *info, int rrr);
-void	reverse_rotate_r(t_info *info);
-int		ft_abs(int i);
-int		fin_max_index(t_info *info);
-void	set_cost(t_info *info);
-void	bigger_stacks(t_info *info);
-void	push_back(t_info *info);
+void	ft_error(char *msg);
+void	ft_check_args(int argc, char **argv);
+int		is_sorted(t_lst **stack);
+int		get_distance(t_lst **stack, int index);
+void	make_top(t_lst **stack, int distance);
+void	free_stack(t_lst **stack);
+void	ft_free(char **str);
+
+// Algorithm utils
+void	radix_sort(t_lst **stack_a, t_lst **stack_b);
+void	simple_sort(t_lst **stack_a, t_lst **stack_b);
+void	index_stack(t_lst **stack);
+void	sort_5(t_lst **stack_a, t_lst **stack_b);
+
+// Instruction functions
+int		swap(t_lst **stack);
+int		push(t_lst **stack_to, t_lst **stack_from);
+int		rotate(t_lst **stack);
+int		reverseRotate(t_lst **stack);
+int		sa(t_lst **stack_a);
+int		sb(t_lst **stack_b);
+int		ss(t_lst **stack_a, t_lst **stack_b);
+int		pa(t_lst **stack_a, t_lst **stack_b);
+int		pb(t_lst **stack_b, t_lst **stack_a);
+int		ra(t_lst **stack_a);
+int		rb(t_lst **stack_b);
+int		rr(t_lst **stack_a, t_lst **stack_b);
+int		rra(t_lst **stack_a);
+int		rrb(t_lst **stack_b);
+int		rrr(t_lst **stack_a, t_lst **stack_b);
 
 #endif

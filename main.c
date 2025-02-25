@@ -12,109 +12,60 @@
 
 #include "push_swap.h"
 
-int	count_args(char **argv, int argc)
+static void	initStack(t_lst **stack, int argc, char **argv)
 {
-	int	i;
-	int	count;
-
-	count = 0;
-	if(argc == 2)
-	{
-		i = 0;
-		while (argv[1][i])
-		{
-			while (argv[1][i])
-			{
-				if (argv[1][i] != ' ' && (i == 0 || argv[1][i - 1] == ' '))
-					count++;
-				i++;
-			}
-		}
-	}
-	else
-		count = argc - 1;
-	return (count);
-}
-
-int	*parse_input(char **argv, int argc)
-{
-	int		*input;
-	char	**split;
+	t_lst	*new;
+	char	**args;
 	int		i;
 
-	input = malloc(sizeof(int) * count_args(argv, argc));
-	if (!input)
-		return (NULL);
-	i = -1;
+	i = 0;
 	if (argc == 2)
-	{
-		split = ft_split(argv[1], ' ');
-		while (split[++i])
-			input[i] = ft_atoi(split[i]);
-		free_split(split);
-	}
+		args = ft_split(argv[1], ' ');
 	else
 	{
-		while(++i < count_args(argv, argc))
-			input[i] = ft_atoi(argv[i + 1]);
+		i = 1;
+		args = argv;
 	}
-	return (input);
-}
-
-int	*aux_input(int argc, char **argv)
-{
-	int	*input;
-
-	if (check_error(argv) < 0)
+	while (args[i])
 	{
-		ft_putstr_fd("Error\n", 2);
-		return (NULL);
-	}
-	input = parse_input(argv, argc);
-	if (!input || check_for_duplicates(input, count_args(argv, argc)) < 0)
-	{
-		ft_putstr_fd("Error\n", 2);
-		free(input);
-		return (NULL);
-	}
-	if (is_ordenated(count_args(argv, argc), input)) 
-	{
-		free(input);
-		return (NULL);
-	}
-	return (input);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	if (!split)
-		return ;
-	while (split[i])
-	{
-		free(split[i]);
+		new = ft_lstnew(ft_atoi(args[i]));
+		ft_lstadd_back(stack, new);
 		i++;
 	}
-	free(split);
+	index_stack(stack);
+	if (argc == 2)
+		ft_free(args);
+}
+
+static void	sort_stack(t_lst **stack_a, t_lst **stack_b)
+{
+	if (ft_lstsize(*stack_a) <= 5)
+		simple_sort(stack_a, stack_b);
+	else
+		radix_sort(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
 {
-	t_info	info;
-	int		*input;
+	t_lst	**stack_a;
+	t_lst	**stack_b;
 
-	input = NULL;
-	if (argc <= 1)
+	if (argc < 2)
+		return (-1);
+	ft_check_args(argc, argv);
+	stack_a = (t_lst **)malloc(sizeof(t_lst));
+	stack_b = (t_lst **)malloc(sizeof(t_lst));
+	*stack_a = NULL;
+	*stack_b = NULL;
+	initStack(stack_a, argc, argv);
+	if (is_sorted(stack_a))
+	{
+		free_stack(stack_a);
+		free_stack(stack_b);
 		return (0);
-	input = aux_input(argc, argv);
-	if (!input)
-		return (0);
-	init_stacks(&info);
-	create_stacks(input, count_args(argv, argc), &info);
-	free(input);
-	init_index(&info);
-	push_swap(&info);
+	}
+	sort_stack(stack_a, stack_b);
+	free_stack(stack_a);
+	free_stack(stack_b);
 	return (0);
 }

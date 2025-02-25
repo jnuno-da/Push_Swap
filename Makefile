@@ -18,9 +18,8 @@ CC = cc
 
 LIBFT	= libft/libft.a
 
-SRCS = cost_chk.c error_utils.c f_swap.c main.c op_a_to_b.c p_back.c \
-		push_utils_f.c reverse_utils_f.c rotate_utils_f.c stacks.c \
-		sorting.c \
+SRCS = c_args.c index_stack.c lst_utils.c main.c radix.c sorting.c	\
+		utils.c stack_instructions.c \
 
 OBJ = $(SRCS:.c=.o)
 
