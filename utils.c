@@ -80,18 +80,3 @@ void	make_top(t_lst **stack, int distance)
 			rra(stack);
 	}
 }
-
-void	free_stack(t_lst **stack)
-{
-	t_lst	*head;
-	t_lst	*tmp;
-
-	head = *stack;
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp);
-	}
-	free(stack);
-}

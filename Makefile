@@ -19,7 +19,7 @@ CC = cc
 LIBFT	= libft/libft.a
 
 SRCS = c_args.c index_stack.c lst_utils.c main.c radix.c sorting.c	\
-		utils.c stack_instructions.c \
+		utils.c stack_instructions.c stack_moves.c stack_moves2.c \
 
 OBJ = $(SRCS:.c=.o)
 

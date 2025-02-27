@@ -12,23 +12,20 @@
 
 #include "push_swap.h"
 
-static int	get_min(t_lst **stack, int val)
+static void	sort_3_case1(t_lst **stack_a)
 {
-	t_lst	*head;
-	int		min;
-
-	head = *stack;
-	min = head->index;
-	while (head->next)
-	{
-		head = head->next;
-		if ((head->index < min) && head->index != val)
-			min = head->index;
-	}
-	return (min);
+	ra(stack_a);
+	sa(stack_a);
+	rra(stack_a);
 }
 
-static void	sort_3(t_lst **stack_a)
+static void	sort_3_case2(t_lst **stack_a)
+{
+	sa(stack_a);
+	rra(stack_a);
+}
+
+void	sort_3(t_lst **stack_a)
 {
 	t_lst	*head;
 	int		min;
@@ -40,11 +37,7 @@ static void	sort_3(t_lst **stack_a)
 	if (is_sorted(stack_a))
 		return ;
 	if (head->index == min && head->next->index != next_min)
-	{
-		ra(stack_a);
-		sa(stack_a);
-		rra(stack_a);
-	}
+		sort_3_case1(stack_a);
 	else if (head->index == next_min)
 	{
 		if (head->next->index == min)
@@ -57,14 +50,11 @@ static void	sort_3(t_lst **stack_a)
 		if (head->next->index == min)
 			ra(stack_a);
 		else
-		{
-			sa(stack_a);
-			rra(stack_a);
-		}
+			sort_3_case2(stack_a);
 	}
 }
 
-static void	sort_4(t_lst **stack_a, t_lst **stack_b)
+void	sort_4(t_lst **stack_a, t_lst **stack_b)
 {
 	int	distance;
 
@@ -111,22 +101,4 @@ void	sort_5(t_lst **stack_a, t_lst **stack_b)
 	pb(stack_a, stack_b);
 	sort_4(stack_a, stack_b);
 	pa(stack_a, stack_b);
-}
-
-void	simple_sort(t_lst **stack_a, t_lst **stack_b)
-{
-	int	size;
-
-	if (is_sorted(stack_a) || ft_lstsize(*stack_a) == 0
-		|| ft_lstsize(*stack_a) == 1)
-		return ;
-	size = ft_lstsize(*stack_a);
-	if (size == 2)
-		sa(stack_a);
-	else if (size == 3)
-		sort_3(stack_a);
-	else if (size == 4)
-		sort_4(stack_a, stack_b);
-	else if (size == 5)
-		sort_5(stack_a, stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: jnuno-da <jnuno-da@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 15:36:57 by jnuno-da          #+#    #+#             */
-/*   Updated: 2025/02/25 21:58:23 by jnuno-da         ###   ########.fr       */
+/*   Updated: 2025/02/27 22:15:35 by jnuno-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ t_lst	*ft_lstnew(int value);
 t_lst	*ft_lstlast(t_lst *head);
 void	ft_lstadd_front(t_lst **stack, t_lst *new);
 void	ft_lstadd_back(t_lst **stack, t_lst *new);
-void	printList(t_lst *head);
+void	printlist(t_lst *head);
 int		ft_lstsize(t_lst *head);
-
 void	ft_error(char *msg);
 void	ft_check_args(int argc, char **argv);
 int		is_sorted(t_lst **stack);
 int		get_distance(t_lst **stack, int index);
+int		get_min(t_lst **stack, int val);
 void	make_top(t_lst **stack, int distance);
 void	free_stack(t_lst **stack);
 void	ft_free(char **str);
@@ -46,13 +46,15 @@ void	ft_free(char **str);
 void	radix_sort(t_lst **stack_a, t_lst **stack_b);
 void	simple_sort(t_lst **stack_a, t_lst **stack_b);
 void	index_stack(t_lst **stack);
+void	sort_3(t_lst **stack_a);
+void	sort_4(t_lst **stack_a, t_lst **stack_b);
 void	sort_5(t_lst **stack_a, t_lst **stack_b);
 
 // Instruction functions
 int		swap(t_lst **stack);
 int		push(t_lst **stack_to, t_lst **stack_from);
 int		rotate(t_lst **stack);
-int		reverseRotate(t_lst **stack);
+int		reverserotate(t_lst **stack);
 int		sa(t_lst **stack_a);
 int		sb(t_lst **stack_b);
 int		ss(t_lst **stack_a, t_lst **stack_b);

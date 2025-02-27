@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+// Prints the Linked List
+void	printlist(t_lst *head)
+{
+	t_lst	*tmp;
+
+	tmp = head;
+	while (tmp != NULL)
+	{
+		ft_putnbr_fd(tmp->value, 1);
+		ft_putendl_fd("", 1);
+		tmp = tmp->next;
+	}
+}
+
 static t_lst	*get_next_min(t_lst **stack)
 {
 	t_lst	*head;
@@ -36,6 +50,21 @@ static t_lst	*get_next_min(t_lst **stack)
 	return (min);
 }
 
+void	free_stack(t_lst **stack)
+{
+	t_lst	*head;
+	t_lst	*tmp;
+
+	head = *stack;
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+	free(stack);
+}
+
 void	index_stack(t_lst **stack)
 {
 	t_lst	*head;
@@ -48,4 +77,20 @@ void	index_stack(t_lst **stack)
 		head->index = index++;
 		head = get_next_min(stack);
 	}
+}
+
+int	get_min(t_lst **stack, int val)
+{
+	t_lst	*head;
+	int		min;
+
+	head = *stack;
+	min = head->index;
+	while (head->next)
+	{
+		head = head->next;
+		if ((head->index < min) && head->index != val)
+			min = head->index;
+	}
+	return (min);
 }
