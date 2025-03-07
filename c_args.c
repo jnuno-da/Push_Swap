@@ -40,6 +40,31 @@ static int	ft_isnum(char *num)
 	return (1);
 }
 
+long	ft_atol(const char *nptr)
+{
+	int		i;
+	long	m;
+	long	res;
+
+	i = 0;
+	m = 1;
+	res = 0;
+	while ((nptr[i] == 32) || (nptr[i] > 8 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			m = m * -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = res * 10 + (nptr[i] - 48);
+		i++;
+	}
+	return (res * m);
+}
+
 void	ft_check_args(int argc, char **argv)
 {
 	int		i;
@@ -56,7 +81,7 @@ void	ft_check_args(int argc, char **argv)
 	}
 	while (args[i])
 	{
-		tmp = ft_atoi(args[i]);
+		tmp = ft_atol(args[i]);
 		if (!ft_isnum(args[i]))
 			ft_error("Error");
 		if (ft_contains(tmp, args, i))
