@@ -6,7 +6,7 @@
 /*   By: jnuno-da <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 11:39:36 by jnuno-da          #+#    #+#             */
-/*   Updated: 2025/02/01 11:39:38 by jnuno-da         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:39:38 by jnuno-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_check_args(int argc, char **argv)
 			ft_error("Error");
 		if (ft_contains(tmp, args, i))
 			ft_error("Error");
-		if (tmp < -2147483648 || tmp > 2147483647)
+		if (tmp < INT_MIN || tmp > INT_MAX)
 			ft_error("Error");
 		i++;
 	}
